@@ -212,8 +212,6 @@ task.spawn(function()
     end
 end)
 
-startAutoFarm()
-
 game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
     if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
         ServerHop()
@@ -230,3 +228,5 @@ delay(300,function()
     ServerHop()
     sendwebhook(v.id,"Timed Out")
 end)
+
+startAutoFarm()
