@@ -212,7 +212,9 @@ task.spawn(function()
             if v:IsA('Part') then
                 if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 12 then
                     local success, err = pcall(function()
-                        fireclickdetector(v:FindFirstChild('ClickDetector'))
+                        if v:FindFirstChild('ClickDetector') then 
+                            fireclickdetector(v.ClickDetector)
+                        end
                     end)
                     if success == false then 
                         if a1 == false then 
