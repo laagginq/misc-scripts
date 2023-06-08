@@ -8,7 +8,7 @@
 repeat wait() until game:IsLoaded()
 getgenv().tes = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
     if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-        ServerHop("AC")
+        game:GetService("TeleportService"):Teleport(game.PlaceId)
     end
 end)
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
