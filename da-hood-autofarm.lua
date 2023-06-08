@@ -205,9 +205,9 @@ local a1 = false
 
 task.spawn(function()
     while wait() do 
-        if game.Players.LocalPlayer.Character.BodyEffects['K.O'].Value == true then 
+        --[[if game.Players.LocalPlayer.Character.BodyEffects['K.O'].Value == true then 
             ServerHop("Someone Knocked You")
-        end
+        end]]
         for i,v in pairs(game:GetService('Workspace')['Ignored']['Drop']:GetChildren()) do
             if v:IsA('Part') then
                 if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 12 then
@@ -226,6 +226,10 @@ task.spawn(function()
             end
         end
     end
+end)
+
+game.Players.Character.Humanoid.Died:Connect(function()
+    ServerHop("Someone Stomped You")
 end)
 
 game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
