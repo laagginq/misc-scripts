@@ -17,7 +17,7 @@ if _G.WebHook then
 end
 
 if not isfile("dahoodautofarm/total.txt") then 
-    writefile("dahoodautofarm/total.txt",0)
+    writefile("dahoodautofarm/total.txt","0")
 end
 
 assert(getrawmetatable)
@@ -90,7 +90,7 @@ local function formatNumber(number)
  end
 
 local function sendwebhook(serverid,msg) 
-    writefile("dahoodautofarm/total.txt",tonumber(readfile("dahoodautofarm/total.txt") + game.Players.LocalPlayer.DataFolder.Currency.Value - oldcash))
+    writefile("dahoodautofarm/total.txt", tostring(tonumber(readfile("dahoodautofarm/total.txt")) + game.Players.LocalPlayer.DataFolder.Currency.Value - oldcash))
     local OSTime = os.time()
     local Time = os.date("!*t", OSTime)
     local Content = ""
