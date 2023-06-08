@@ -50,6 +50,8 @@ grm.__namecall =
             return
         elseif tostring(args[1]) == "BR_KICKMOBILE" then
             return
+        elseif tostring(args[1]) == "UpdateMousePos" then
+            return
         end
         return old(self, ...)
     end
