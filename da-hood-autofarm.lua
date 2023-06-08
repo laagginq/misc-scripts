@@ -220,7 +220,7 @@ game:GetService("UserInputService").InputBegan:Connect(function(key)
     end
 end)
 
-delay(800,function()
+delay(300,function()
     ServerHop()
     sendwebhook(v.id,"Timed Out")
 end)
