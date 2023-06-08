@@ -1,5 +1,3 @@
-_G.WebHook = "https://ptb.discord.com/api/webhooks/1115079492910719026/TCbNNmSBTnOWA8L-wxu1oEcAtl75ZHKf5EhwmbujLbmxOkXGVMkE2gGnF3Bo7nTtxJm_"
-
 repeat wait() until game:IsLoaded()
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
 wait(1)
