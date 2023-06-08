@@ -1,6 +1,9 @@
+_G.WebHook = "https://ptb.discord.com/api/webhooks/1115079492910719026/TCbNNmSBTnOWA8L-wxu1oEcAtl75ZHKf5EhwmbujLbmxOkXGVMkE2gGnF3Bo7nTtxJm_"
+
 repeat wait() until game:IsLoaded()
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
 wait(1)
+local scriptloadstring = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/misc-scripts/main/da-hood-autofarm.lua"))()]]
 if not isfolder("dahoodautofarm") then 
     makefolder("dahoodautofarm")
 end
@@ -135,6 +138,7 @@ local function sendwebhook(serverid,msg)
 end
 
 local function ServerHop() 
+    queue_on_teleport(scriptloadstring)
     local Http = game:GetService("HttpService")
     local TPS = game:GetService("TeleportService")
     local Api = "https://games.roblox.com/v1/games/"
