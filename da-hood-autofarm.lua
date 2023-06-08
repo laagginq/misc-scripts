@@ -217,7 +217,7 @@ task.spawn(function()
                     if success == false then 
                         if a1 == false then 
                             a1 = true
-                            ServerHop("Something Broke :(")
+                            ServerHop("Something Broke: "..err)
                         end
                     end
                 end
