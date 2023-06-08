@@ -16,6 +16,10 @@ if _G.WebHook then
     writefile("dahoodautofarm/webhook.txt",_G.WebHook)
 end
 
+if not isfile("dahoodautofarm/total.txt") then 
+    writefile("dahoodautofarm/total.txt",0)
+end
+
 assert(getrawmetatable)
 grm = getrawmetatable(game)
 setreadonly(grm, false)
@@ -86,6 +90,7 @@ local function formatNumber(number)
  end
 
 local function sendwebhook(serverid,msg) 
+    tonumber(readfile("dahoodautofarm/total.txt")) = tonumber(readfile("dahoodautofarm/total.txt") + game.Players.LocalPlayer.DataFolder.Currency.Value - oldcash)
     local OSTime = os.time()
     local Time = os.date("!*t", OSTime)
     local Content = ""
@@ -106,6 +111,11 @@ local function sendwebhook(serverid,msg)
             {
                 ["name"] = "Total Cash",
                 ["value"] = "$"..formatNumber(game.Players.LocalPlayer.DataFolder.Currency.Value),
+                ["inline"] = false
+            },
+            {
+                ["name"] = "Total Cash All Time",
+                ["value"] = "$"..formatNumber(tonumber(readfile("dahoodautofarm/total.txt"))),
                 ["inline"] = false
             },
             {
@@ -142,7 +152,7 @@ local function sendwebhook(serverid,msg)
     }
 end
 
-local function ServerHop() 
+local function ServerHop(customservermsg) 
     queue_on_teleport(scriptloadstring)
     local Http = game:GetService("HttpService")
     local TPS = game:GetService("TeleportService")
@@ -160,7 +170,7 @@ local function ServerHop()
        Server = Servers.data[1]
        Next = Servers.nextPageCursor
     until Server
-    sendwebhook(Server.id,"No More Open Cashiers")
+    sendwebhook(Server.id,customservermsg)
     wait(1)
     TPS:TeleportToPlaceInstance(_place,Server.id,game.Players.LocalPlayer)
 end
@@ -186,13 +196,16 @@ local function startAutoFarm()
     end
     wait(0.5)
     print("Ended")
-    ServerHop() 
+    ServerHop("No More Open Cashiers") 
 end
 
 local a1 = false
 
 task.spawn(function()
     while wait() do 
+        if game.Players.LocalPlayer.Character.BodyEffects['K.O'].Value == true then 
+            ServerHop("Someone Knocked You")
+        end
         for i,v in pairs(game:GetService('Workspace')['Ignored']['Drop']:GetChildren()) do
             if v:IsA('Part') then
                 if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 12 then
@@ -202,8 +215,7 @@ task.spawn(function()
                     if success == false then 
                         if a1 == false then 
                             a1 = true
-                            ServerHop()
-                            sendwebhook(v.id,"Something broke :(")
+                            ServerHop("Something Broke :(")
                         end
                     end
                 end
@@ -214,19 +226,18 @@ end)
 
 game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
     if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-        ServerHop()
+        ServerHop("AC")
     end
 end)
 
 game:GetService("UserInputService").InputBegan:Connect(function(key)
     if key.KeyCode == Enum.KeyCode.R then 
-        ServerHop()
+        ServerHop("Forced Server Hop")
     end
 end)
 
 delay(300,function()
-    ServerHop()
-    sendwebhook(v.id,"Timed Out")
+    ServerHop("No More Open Cashiers")
 end)
 
 startAutoFarm()
