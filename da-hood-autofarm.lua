@@ -228,7 +228,7 @@ task.spawn(function()
     end
 end)
 
-game.Players.Character.Humanoid.Died:Connect(function()
+game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
     ServerHop("Someone Stomped You")
 end)
 
