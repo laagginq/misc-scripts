@@ -1,6 +1,8 @@
 -- Made by Vincent2323 and xz#1111
 -- .gg/serial
 
+
+
 --_G.WebHook = ""
 
 repeat wait() until game:IsLoaded()
