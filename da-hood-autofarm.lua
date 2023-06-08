@@ -1,3 +1,5 @@
+--_G.WebHook = ""
+
 repeat wait() until game:IsLoaded()
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
 wait(1)
@@ -207,7 +209,13 @@ end)
 
 startAutoFarm()
 
+game:GetService("UserInputService").InputBegan:Connect(function(key)
+    if key.KeyCode == Enum.KeyCode.R then 
+        ServerHop()
+    end
+end)
+
 delay(800,function()
     ServerHop()
-    sendwebhook(v.id,"Something broke :(")
+    sendwebhook(v.id,"Timed Out")
 end)
