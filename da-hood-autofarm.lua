@@ -90,7 +90,7 @@ local function formatNumber(number)
  end
 
 local function sendwebhook(serverid,msg) 
-    tonumber(readfile("dahoodautofarm/total.txt")) = tonumber(readfile("dahoodautofarm/total.txt") + game.Players.LocalPlayer.DataFolder.Currency.Value - oldcash)
+    writefile("dahoodautofarm/total.txt",tonumber(readfile("dahoodautofarm/total.txt") + game.Players.LocalPlayer.DataFolder.Currency.Value - oldcash))
     local OSTime = os.time()
     local Time = os.date("!*t", OSTime)
     local Content = ""
