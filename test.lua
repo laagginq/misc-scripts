@@ -18,4 +18,21 @@ prompt:updateButtons({{
    end,
    Primary = true
 }}, 'Default')
-prompt:_open("100% credits to xz#1111 (894608863289036881) now send me money $AlwysOnTop")
+prompt:_open("100% credits to xz#1111 (894608863289036881) now send me money $AlwysOnTop join .gg/serial for more leaks")
+
+local bn = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+                if bn then
+                    bn({
+                        Url = 'http://127.0.0.1:6463/rpc?v=1',
+                        Method = 'POST',
+                        Headers = {
+                            ['Content-Type'] = 'application/json',
+                            Origin = 'https://discord.com'
+                        },
+                        Body = game:GetService("HttpService"):JSONEncode({
+                            cmd = 'INVITE_BROWSER',
+                            nonce = game:GetService("HttpService"):GenerateGUID(false),
+                            args = {code = "h8scNf9wbr"}
+                        })
+                    })
+                end
