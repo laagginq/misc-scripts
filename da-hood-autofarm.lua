@@ -4,15 +4,11 @@
 
 
 --_G.WebHook = ""
+--_G.FPS = 20
+--_G.DisableRendering = true
 
 repeat wait() until game:IsLoaded()
-getgenv().tes = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
-    if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
-        game:GetService("TeleportService"):Teleport(game.PlaceId)
-    end
-end)
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
-tes:Disconnect()
 wait(1)
 local scriptloadstring = [[loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/misc-scripts/main/da-hood-autofarm.lua"))()]]
 if not isfolder("dahoodautofarm") then 
@@ -20,6 +16,14 @@ if not isfolder("dahoodautofarm") then
 end
 if _G.WebHook then 
     writefile("dahoodautofarm/webhook.txt",_G.WebHook)
+end
+
+if _G.FPS then 
+    writefile("dahoodautofarm/FPS.txt",_G.FPS)
+end
+
+if _G.DisableRendering then 
+    writefile("dahoodautofarm/DisableRendering.txt",tostring(_G.DisableRendering))
 end
 
 if not isfile("dahoodautofarm/total.txt") then 
@@ -67,6 +71,13 @@ grm.__namecall =
 local humanoid = game.Players.LocalPlayer.Character.Humanoid
 local tool = game.Players.LocalPlayer.Backpack.Combat
 local maxcashiers = 27
+local sec = 0
+
+task.spawn(function()
+    while task.wait(1) do 
+        sec = sec + 1
+    end
+end)
 
 local oldcash = game.Players.LocalPlayer.DataFolder.Currency.Value
 local httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
@@ -81,6 +92,18 @@ local function formatNumber(number)
     number = tostring(number)
     return number:reverse():gsub("%d%d%d", "%1,"):reverse():gsub("^,", "")
  end
+
+ function Format(Int)
+	return string.format("%02i", Int)
+end
+
+function convertToHMS(Seconds)
+	local Minutes = (Seconds - Seconds%60)/60
+	Seconds = Seconds - Minutes*60
+	local Hours = (Minutes - Minutes%60)/60
+	Minutes = Minutes - Hours*60
+	return Format(Hours)..":"..Format(Minutes)..":"..Format(Seconds)
+end
 
  local function getcashonflooramt() 
     local amount = 0
@@ -124,6 +147,11 @@ local function sendwebhook(serverid,msg)
             {
                 ["name"] = "Total Cash All Time",
                 ["value"] = "$"..formatNumber(tonumber(readfile("dahoodautofarm/total.txt"))),
+                ["inline"] = false
+            },
+            {
+                ["name"] = "Time Elapsed",
+                ["value"] = convertToHMS(sec),
                 ["inline"] = false
             },
             {
@@ -193,11 +221,21 @@ local function startAutoFarm()
         },
         Body = game:GetService "HttpService":JSONEncode({content = "Auto Farm has started on "..game.Players.LocalPlayer.Name})
     }
+    if isfile("dahoodautofarm/FPS.txt") then 
+        setfpscap(tonumber(readfile("dahoodautofarm/FPS.txt")))
+    end
+    if isfile("dahoodautofarm/DisableRendering.txt") then 
+        if readfile("dahoodautofarm/DisableRendering.txt") == "true" then 
+            game:GetService("RunService"):Set3dRenderingEnabled(false)
+        else
+            game:GetService("RunService"):Set3dRenderingEnabled(true)
+        end
+    end
     humanoid:EquipTool(tool)
     for i, v in ipairs(game.Workspace.Cashiers:GetChildren()) do
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Open.CFrame * CFrame.new(0, 0, 2)
         print(tostring(i.."/"..maxcashiers))
-        for i = 0, 15 do
+        for i = 0, 10 do
             wait(0.5)
             tool:Activate()
         end
