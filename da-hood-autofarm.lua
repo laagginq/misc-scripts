@@ -2,10 +2,12 @@
 -- .gg/serial
 
 
-
---_G.WebHook = ""
---_G.FPS = 20
---_G.DisableRendering = true
+--[[
+	_G.WebHook = "yourwebhookhere"
+	_G.FPS = 20
+	_G.DisableRendering = true
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/misc-scripts/main/da-hood-autofarm.lua"))()
+]]
 
 repeat wait() until game:IsLoaded()
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
