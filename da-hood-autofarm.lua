@@ -2,12 +2,8 @@
 -- .gg/serial
 
 
---[[
-	_G.WebHook = "yourwebhookhere"
-	_G.FPS = 20
-	_G.DisableRendering = true
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/laagginq/misc-scripts/main/da-hood-autofarm.lua"))()
-]]
+
+--_G.WebHook = ""
 
 repeat wait() until game:IsLoaded()
 repeat wait() until game.Players.LocalPlayer.Character:WaitForChild("FULLY_LOADED_CHAR")
@@ -21,7 +17,7 @@ if _G.WebHook then
 end
 
 if _G.FPS then 
-    writefile("dahoodautofarm/FPS.txt",_G.FPS)
+    writefile("dahoodautofarm/FPS.txt",tostring(_G.FPS))
 end
 
 if _G.DisableRendering then 
