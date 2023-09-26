@@ -213,7 +213,7 @@ local function startAutoFarm()
         Headers = {
             ["Content-Type"] = "application/json"
         },
-        Body = game:GetService "HttpService":JSONEncode({content = "Auto Farm has started on "..game.Players.LocalPlayer.Name})
+        Body = game:GetService "HttpService":JSONEncode({content = "Auto Farm has started on "..game.Players.LocalPlayer.Name..", Press **R** to force server hop"})
     }
     if isfile("dahoodautofarm/FPS.txt") then 
         setfpscap(tonumber(readfile("dahoodautofarm/FPS.txt")))
@@ -223,8 +223,8 @@ local function startAutoFarm()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Open.CFrame * CFrame.new(0, 0, 2)
         print(tostring(i.."/"..maxcashiers))
         for i = 0, 10 do
-            wait(0.5)
             tool:Activate()
+            wait(0.5)
         end
     end
     wait(0.5)
