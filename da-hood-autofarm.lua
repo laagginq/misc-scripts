@@ -20,10 +20,6 @@ if _G.FPS then
     writefile("dahoodautofarm/FPS.txt",tostring(_G.FPS))
 end
 
-if _G.DisableRendering then 
-    writefile("dahoodautofarm/DisableRendering.txt",tostring(_G.DisableRendering))
-end
-
 if not isfile("dahoodautofarm/total.txt") then 
     writefile("dahoodautofarm/total.txt","0")
 end
@@ -221,13 +217,6 @@ local function startAutoFarm()
     }
     if isfile("dahoodautofarm/FPS.txt") then 
         setfpscap(tonumber(readfile("dahoodautofarm/FPS.txt")))
-    end
-    if isfile("dahoodautofarm/DisableRendering.txt") then 
-        if readfile("dahoodautofarm/DisableRendering.txt") == "true" then 
-            game:GetService("RunService"):Set3dRenderingEnabled(false)
-        else
-            game:GetService("RunService"):Set3dRenderingEnabled(true)
-        end
     end
     humanoid:EquipTool(tool)
     for i, v in ipairs(game.Workspace.Cashiers:GetChildren()) do
