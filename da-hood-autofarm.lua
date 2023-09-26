@@ -224,7 +224,7 @@ local function startAutoFarm()
         print(tostring(i.."/"..maxcashiers))
         for i = 0, 10 do
             tool:Activate()
-            wait(0.5)
+            wait(0.6)
         end
     end
     wait(0.5)
