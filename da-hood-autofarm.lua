@@ -160,7 +160,7 @@ local function sendwebhook(serverid,msg)
             },
         },
         ["footer"] = {
-            ["text"] = "Da Hood Auto Farm | .gg/serial | xz#1111",
+            ["text"] = "Da Hood Auto Farm | .gg/camlock | made by swipingfraud2",
         },
         ["timestamp"] = string.format(
             "%d-%d-%dT%02d:%02d:%02dZ",
