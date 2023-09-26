@@ -241,7 +241,7 @@ task.spawn(function()
         end]]
         for i,v in pairs(game:GetService('Workspace')['Ignored']['Drop']:GetChildren()) do
             if v:IsA('Part') then
-                if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 12 then
+                if (v.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 10 then
                     local success, err = pcall(function()
                         if v:FindFirstChild('ClickDetector') then 
                             fireclickdetector(v.ClickDetector)
